@@ -1,0 +1,36 @@
+{
+    "name":         "xelax90/xelax-formgen",
+	"version":      "dev-master",
+    "description":  "Generator for Form and Fieldset classes",
+    "type":         "module",
+	"license":      "GPL-2.0",
+    "homepage":     "https://github.com/xelax90/xelax-formgen",
+    "keywords": [
+        "zf2",
+		"generator",
+		"form",
+		"fieldset"
+    ],
+    "authors": [
+        {
+            "name": "xelax",
+            "email": "schurix@gmx.de",
+			"homepage" : "https://github.com/xelax90"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4",
+		"zendframework/zendframework": "2.3.*"
+    },
+    "require-dev": {
+    },
+    "suggests": {
+        "xelax90/xelax-admin": "Toolset for easy admin backend. The generator was made for this"
+	},
+    "autoload": {
+        "psr-0": {
+            "XelaxFormgen\\": "src/"
+        }
+    }
+}
