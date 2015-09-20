@@ -26,7 +26,6 @@ use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use DoctrineModule\Persistence\ObjectManagerAwareInterface;
-use Doctrine\Common\Persistence\ObjectManager;
 
 use <?= $this->entityClass ?>;
 
@@ -34,7 +33,7 @@ use <?= $this->entityClass ?>;
  * <?= $this->entityName ?> Fieldset
  */
 class <?= $this->entityName ?>Fieldset extends <?= empty($this->parentFieldset) ? 'Fieldset' : '\\'.$this->parentFieldset ?> implements InputFilterProviderInterface, ObjectManagerAwareInterface{
-	protected $objectManager;
+	use \DoctrineModule\Persistence\ProvidesObjectManager;
 
 	public function __construct($name = "", $options = array()){
 		if($name == ""){
@@ -75,14 +74,5 @@ class <?= $this->entityName ?>Fieldset extends <?= empty($this->parentFieldset) 
 <?php 
 		endif; ?>
 		return $filters;
-	}
-
-	public function getObjectManager() {
-		return $this->objectManager;
-	}
-
-	public function setObjectManager(ObjectManager $objectManager) {
-		$this->objectManager = $objectManager;
-		return $this;
 	}
 }
