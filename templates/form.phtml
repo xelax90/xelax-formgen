@@ -23,9 +23,11 @@
 namespace <?= $this->formNamespace ?>;
 
 use Zend\Form\Form;
+use Zend\Form\Element\Csrf;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use Zend\InputFilter\InputFilter;
 use DoctrineModule\Persistence\ObjectManagerAwareInterface;
+use DoctrineModule\Persistence\ProvidesObjectManager;
 
 /**
  * <?= $this->entityName ?> Form
@@ -33,7 +35,7 @@ use DoctrineModule\Persistence\ObjectManagerAwareInterface;
  * @author schurix
  */
 class <?= $this->entityName ?>Form extends Form implements ObjectManagerAwareInterface{
-	use \DoctrineModule\Persistence\ProvidesObjectManager;
+	use ProvidesObjectManager;
 
 	public function __construct($name = "", $options = array()){
 		// we want to ignore the name passed
@@ -52,6 +54,11 @@ class <?= $this->entityName ?>Form extends Form implements ObjectManagerAwareInt
 			'options' => array(
 				'use_as_base_fieldset' => true,
 			),
+		));
+		
+		$this->add(array(
+			'name' => '<?= strtolower($this->entityName) ?>_csrf',
+			'type' => Csrf::class,
 		));
 
 		$this->add(array(
