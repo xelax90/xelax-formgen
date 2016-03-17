@@ -24,17 +24,14 @@ namespace <?= $this->fieldsetNamespace ?>;
 
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
-use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
-use DoctrineModule\Persistence\ObjectManagerAwareInterface;
-use DoctrineModule\Persistence\ProvidesObjectManager;
+use XelaxHTMLPurifier\Filter\HTMLPurifier;
 
 use <?= $this->entityClass ?>;
 
 /**
  * <?= $this->entityName ?> Fieldset
  */
-class <?= $this->entityName ?>Fieldset extends <?= empty($this->parentFieldset) ? 'Fieldset' : '\\'.$this->parentFieldset ?> implements InputFilterProviderInterface, ObjectManagerAwareInterface{
-	use ProvidesObjectManager;
+class <?= $this->entityName ?>Fieldset extends <?= empty($this->parentFieldset) ? 'Fieldset' : '\\'.$this->parentFieldset ?> implements InputFilterProviderInterface{
 
 	public function __construct($name = "", $options = array()){
 		if($name == ""){
@@ -45,8 +42,7 @@ class <?= $this->entityName ?>Fieldset extends <?= empty($this->parentFieldset) 
 
 	public function init(){
 		parent::init();
-		$this->setHydrator(new DoctrineHydrator($this->getObjectManager()))
-			 ->setObject(new <?= $this->entityName ?>());
+		$this->setObject(new <?= $this->entityName ?>());
 
 <?php
 			foreach($this->fields as $field){

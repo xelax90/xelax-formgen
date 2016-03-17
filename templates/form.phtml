@@ -24,18 +24,13 @@ namespace <?= $this->formNamespace ?>;
 
 use Zend\Form\Form;
 use Zend\Form\Element\Csrf;
-use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use Zend\InputFilter\InputFilter;
-use DoctrineModule\Persistence\ObjectManagerAwareInterface;
-use DoctrineModule\Persistence\ProvidesObjectManager;
+use XelaxHTMLPurifier\Filter\HTMLPurifier;
 
 /**
  * <?= $this->entityName ?> Form
- *
- * @author schurix
  */
-class <?= $this->entityName ?>Form extends Form implements ObjectManagerAwareInterface{
-	use ProvidesObjectManager;
+class <?= $this->entityName ?>Form extends Form{
 
 	public function __construct($name = "", $options = array()){
 		// we want to ignore the name passed
@@ -45,12 +40,11 @@ class <?= $this->entityName ?>Form extends Form implements ObjectManagerAwareInt
 
 	public function init(){
 		parent::init();
-		$this->setHydrator(new DoctrineHydrator($this->getObjectManager()))
-			 ->setInputFilter(new InputFilter());
+		$this->setInputFilter(new InputFilter());
 
 		$this->add(array(
 			'name' => '<?= strtolower($this->entityName) ?>',
-			'type' => <?= $this->fieldsetClass ?>::class,
+			'type' => \<?= $this->fieldsetClass ?>::class,
 			'options' => array(
 				'use_as_base_fieldset' => true,
 			),
